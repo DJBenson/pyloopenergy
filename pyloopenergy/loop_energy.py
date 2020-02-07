@@ -47,15 +47,15 @@ class LoopEnergy():
     Based on reverse engineering by marcosscriven
     https://github.com/marcosscriven/loop
     """
-    def __init__(self, elec_serial, elec_secret,
+    def __init__(self, serial, secret,
                  gas_serial=None, gas_secret=None,
                  gas_meter_type=METRIC, gas_calorific=DEFAULT_CALORIFIC):
         # pylint: disable=too-many-arguments
         '''
         Electricity is always required, gas is optional
         '''
-        self.elec_serial = elec_serial
-        self.elec_secret = elec_secret
+        self.serial = serial
+        self.secret = secret
 
         self.gas_serial = gas_serial
         self.gas_secret = gas_secret
@@ -150,9 +150,9 @@ class LoopEnergy():
                     socket_io.on('gas_interval', self._update_gas)
                     socket_io.emit('subscribe_electric_realtime',
                                    {
-                                       'serial': self.elec_serial,
+                                       'serial': self.serial,
                                        'clientIp': '127.0.0.1',
-                                       'secret': self.elec_secret
+                                       'secret': self.secret
                                    })
 
                     if self.gas_serial is not None:
